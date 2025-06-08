@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="Config">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/basic/appconfig/config.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/basic/appconfig/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CustomClaims">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/pkg/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="InfoWork">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/work.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="InfoWorkRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="InfoWorkResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JWT">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/pkg/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ListWork">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/work.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ListWorkRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ListWorkResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Login">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LoginRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LoginResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Nacos">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/basic/appconfig/config.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/basic/appconfig/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Personal">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PersonalRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PersonalResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PostComment">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/comment.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PostCommentRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PostCommentResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PublishContentRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PublishContentResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PublishContents">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/work.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SendSms">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SendSmsRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SendSmsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedUserServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user_grpc.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdatePersonal">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api_gateway/api/request/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdatePersonalRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdatePersonalResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/hander/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="VideoTopic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_topic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="VideoUser">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="VideoWorkComment">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_work_comment.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="VideoWorkObject">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_work_opject..go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="VideoWorks">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_works.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="userClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user_grpc.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="x">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go" />
+              <option value="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/appconfig/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181894311" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                  <option value="Nacos" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/cmd/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749042236180" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/global/global.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264410" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/inits/init.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264412" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/inits/mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264412" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/inits/nacos.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264413" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/inits/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264413" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/basic/inits/zap.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748956505452" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/hander/comment.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181893728" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/hander/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181893728" />
+              <option name="schema">
+                <list>
+                  <option value="UserServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/hander/work.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181893729" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/internal/dao/common.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264416" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_topic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181896448" />
+              <option name="schema">
+                <list>
+                  <option value="VideoTopic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181896449" />
+              <option name="schema">
+                <list>
+                  <option value="VideoUser" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_work_comment.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181896449" />
+              <option name="schema">
+                <list>
+                  <option value="VideoWorkComment" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_work_opject..go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181896450" />
+              <option name="schema">
+                <list>
+                  <option value="VideoWorkObject" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/model/video_works.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181896450" />
+              <option name="schema">
+                <list>
+                  <option value="VideoWorks" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/pkg/aes.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264417" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181895956" />
+              <option name="schema">
+                <list>
+                  <option value="SendSmsRequest" />
+                  <option value="SendSmsResponse" />
+                  <option value="LoginRequest" />
+                  <option value="LoginResponse" />
+                  <option value="PublishContentRequest" />
+                  <option value="PublishContentResponse" />
+                  <option value="PersonalRequest" />
+                  <option value="PersonalResponse" />
+                  <option value="UpdatePersonalRequest" />
+                  <option value="UpdatePersonalResponse" />
+                  <option value="ListWorkRequest" />
+                  <option value="ListWorkResponse" />
+                  <option value="ListWork" />
+                  <option value="InfoWorkRequest" />
+                  <option value="InfoWorkResponse" />
+                  <option value="PostCommentRequest" />
+                  <option value="PostCommentResponse" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/proto/user_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181895956" />
+              <option name="schema">
+                <list>
+                  <option value="userClient" />
+                  <option value="UnimplementedUserServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/api/hander/comment.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181892915" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/api/hander/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181892916" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/api/hander/work.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181892916" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/api/request/comment.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181893137" />
+              <option name="schema">
+                <list>
+                  <option value="PostComment" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/api/request/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181893137" />
+              <option name="schema">
+                <list>
+                  <option value="SendSms" />
+                  <option value="Login" />
+                  <option value="Personal" />
+                  <option value="UpdatePersonal" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/api/request/work.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181893138" />
+              <option name="schema">
+                <list>
+                  <option value="PublishContents" />
+                  <option value="ListWork" />
+                  <option value="InfoWork" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/appconfig/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264420" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                  <option value="Nacos" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/cmd/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264421" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/global/global.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264422" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/inits/init.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264422" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/inits/mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264422" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/inits/nacos.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264423" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/inits/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264423" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/basic/inits/zap.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264423" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/pkg/jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1748571264424" />
+              <option name="schema">
+                <list>
+                  <option value="CustomClaims" />
+                  <option value="JWT" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/proto/user.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181895418" />
+              <option name="schema">
+                <list>
+                  <option value="SendSmsRequest" />
+                  <option value="SendSmsResponse" />
+                  <option value="LoginRequest" />
+                  <option value="LoginResponse" />
+                  <option value="PublishContentRequest" />
+                  <option value="PublishContentResponse" />
+                  <option value="PersonalRequest" />
+                  <option value="PersonalResponse" />
+                  <option value="UpdatePersonalRequest" />
+                  <option value="UpdatePersonalResponse" />
+                  <option value="ListWorkRequest" />
+                  <option value="ListWorkResponse" />
+                  <option value="ListWork" />
+                  <option value="InfoWorkRequest" />
+                  <option value="InfoWorkResponse" />
+                  <option value="PostCommentRequest" />
+                  <option value="PostCommentResponse" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/proto/user_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181895418" />
+              <option name="schema">
+                <list>
+                  <option value="userClient" />
+                  <option value="UnimplementedUserServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api_gateway/router/router.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749181894854" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/main/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1749384187145" />
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="config" value="Config" />
+        <entry key="custom_claims" value="CustomClaims" />
+        <entry key="info_work" value="InfoWork" />
+        <entry key="info_work_request" value="InfoWorkRequest" />
+        <entry key="info_work_response" value="InfoWorkResponse" />
+        <entry key="jwt" value="JWT" />
+        <entry key="list_work" value="ListWork" />
+        <entry key="list_work_request" value="ListWorkRequest" />
+        <entry key="list_work_response" value="ListWorkResponse" />
+        <entry key="login" value="Login" />
+        <entry key="login_request" value="LoginRequest" />
+        <entry key="login_response" value="LoginResponse" />
+        <entry key="nacos" value="Nacos" />
+        <entry key="personal" value="Personal" />
+        <entry key="personal_request" value="PersonalRequest" />
+        <entry key="personal_response" value="PersonalResponse" />
+        <entry key="post_comment" value="PostComment" />
+        <entry key="post_comment_request" value="PostCommentRequest" />
+        <entry key="post_comment_response" value="PostCommentResponse" />
+        <entry key="publish_content_request" value="PublishContentRequest" />
+        <entry key="publish_content_response" value="PublishContentResponse" />
+        <entry key="publish_contents" value="PublishContents" />
+        <entry key="send_sms" value="SendSms" />
+        <entry key="send_sms_request" value="SendSmsRequest" />
+        <entry key="send_sms_response" value="SendSmsResponse" />
+        <entry key="unimplemented_user_server" value="UnimplementedUserServer" />
+        <entry key="update_personal" value="UpdatePersonal" />
+        <entry key="update_personal_request" value="UpdatePersonalRequest" />
+        <entry key="update_personal_response" value="UpdatePersonalResponse" />
+        <entry key="user_client" value="userClient" />
+        <entry key="user_server" value="UserServer" />
+        <entry key="video_topic" value="VideoTopic" />
+        <entry key="video_user" value="VideoUser" />
+        <entry key="video_work_comment" value="VideoWorkComment" />
+        <entry key="video_work_object" value="VideoWorkObject" />
+        <entry key="video_works" value="VideoWorks" />
+        <entry key="x" value="x" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1749383213008" />
+  </component>
+</project>
