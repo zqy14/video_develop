@@ -361,7 +361,7 @@
         <entry key="file://$PROJECT_DIR$/LiveStreaming_srv/hander/user.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1749181893728" />
+              <option name="lastModified" value="1749388450810" />
               <option name="schema">
                 <list>
                   <option value="UserServer" />
@@ -503,7 +503,7 @@
         <entry key="file://$PROJECT_DIR$/api_gateway/api/hander/user.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1749181892916" />
+              <option name="lastModified" value="1749386534514" />
             </ScannedPath>
           </value>
         </entry>

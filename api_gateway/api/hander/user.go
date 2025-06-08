@@ -37,7 +37,7 @@ func Sendsms(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
-		"msg":  "发送验证码成功",
+		"msg":  "短信发送成功",
 	})
 }
 

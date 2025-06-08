@@ -43,9 +43,9 @@ func (c *UserServer) SendSms(_ context.Context, in *__.SendSmsRequest) (*__.Send
 	if err == nil && count > 5 {
 		return nil, fmt.Errorf("验证码发送过于频繁，请明天再试")
 	}
-	global.Rdb.Expire(context.Background(), sendCountKey, 24*time.Hour)
+	global.Rdb.Expire(context.Background(), sendCountKey, time.Minute*5)
 
-	global.Rdb.Set(context.Background(), key, code, time.Minute*2)
+	global.Rdb.Set(context.Background(), key, code, time.Minute)
 
 	return &__.SendSmsResponse{}, nil
 }
@@ -72,13 +72,13 @@ func (c *UserServer) Login(_ context.Context, in *__.LoginRequest) (*__.LoginRes
 
 		newUser := model.VideoUser{
 			Name:   "用户" + in.Mobile,
-			Mobile: in.Mobile,
 			Status: strconv.Itoa(1),
+			Mobile: in.Mobile,
 		}
 
 		result := global.DB.Create(&newUser)
 		if result.Error != nil {
-			return nil, fmt.Errorf("注册失败: %v", result.Error)
+			return nil, fmt.Errorf("注册失败")
 		}
 		user = newUser
 	}
@@ -90,15 +90,6 @@ func (c *UserServer) Login(_ context.Context, in *__.LoginRequest) (*__.LoginRes
 	}
 
 	if get.Val() != in.SendSmsCode {
-
-		errorCountKey := "LoginError_" + in.Mobile
-		count, _ := global.Rdb.Incr(context.Background(), errorCountKey).Result()
-		global.Rdb.Expire(context.Background(), errorCountKey, time.Hour)
-
-		if count > 5 {
-			return nil, fmt.Errorf("验证码错误次数过多，请稍后再试")
-		}
-
 		return nil, fmt.Errorf("验证码错误")
 	}
 
@@ -114,8 +105,9 @@ func (c *UserServer) Login(_ context.Context, in *__.LoginRequest) (*__.LoginRes
 func (c *UserServer) Personal(_ context.Context, in *__.PersonalRequest) (*__.PersonalResponse, error) {
 	var user model.VideoUser
 	result := global.DB.First(&user, in.Id)
+
 	if result.Error != nil {
-		return nil, result.Error
+		return nil, fmt.Errorf("用户不存在")
 	}
 
 	return &__.PersonalResponse{
@@ -126,7 +118,7 @@ func (c *UserServer) Personal(_ context.Context, in *__.PersonalRequest) (*__.Pe
 		Sex:           user.Sex,
 		IpAddress:     user.IpAddress,
 		Constellation: user.Constellation,
-		AttendCount:   float32(user.AttendCount),
+		AttendCount:   user.AttendCount,
 		FansCount:     float32(user.FansCount),
 		ZanCount:      float32(user.ZanCount),
 		AvatorFileId:  int64(user.AvatorFileId),
