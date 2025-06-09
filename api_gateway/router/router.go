@@ -20,13 +20,15 @@ func LoadRouter(r *gin.Engine) {
 
 		work := g.Group("/work")
 		{
+			work.POST("/infoWork", hander.InfoWork)
+			user.Use(pkg.JWTAuth("2211a"))
 			work.POST("/publishContent", hander.PublishContent)
 			work.POST("/listWork", hander.ListWork)
-			work.POST("/infoWork", hander.InfoWork)
 		}
 
 		comment := g.Group("/comment")
 		{
+			user.Use(pkg.JWTAuth("2211a"))
 			comment.POST("/postComment", hander.PostComment)
 		}
 

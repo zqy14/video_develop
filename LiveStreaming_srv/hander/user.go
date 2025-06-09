@@ -103,6 +103,7 @@ func (c *UserServer) Login(_ context.Context, in *__.LoginRequest) (*__.LoginRes
 }
 
 func (c *UserServer) Personal(_ context.Context, in *__.PersonalRequest) (*__.PersonalResponse, error) {
+
 	var user model.VideoUser
 	result := global.DB.First(&user, in.Id)
 
@@ -110,27 +111,38 @@ func (c *UserServer) Personal(_ context.Context, in *__.PersonalRequest) (*__.Pe
 		return nil, fmt.Errorf("用户不存在")
 	}
 
-	return &__.PersonalResponse{
+	resp := &__.PersonalResponse{
 		Name:          user.Name,
 		NickName:      user.NickName,
 		UserCode:      user.UserCode,
 		Signature:     user.Signature,
 		Sex:           user.Sex,
-		IpAddress:     user.IpAddress,
+		IpAddress:     "",
 		Constellation: user.Constellation,
 		AttendCount:   user.AttendCount,
 		FansCount:     float32(user.FansCount),
 		ZanCount:      float32(user.ZanCount),
 		AvatorFileId:  int64(user.AvatorFileId),
 		AuthriryInfo:  user.AuthriryInfo,
-		Mobile:        user.Mobile,
+		Mobile:        "",
 		RealNameAuth:  user.RealNameAuth,
-		Age:           user.Age,
-		OnlineStatus:  user.OnlineStatus,
+		Age:           0,
+		OnlineStatus:  strconv.Itoa(0),
 		AuthrityType:  user.AuthrityType,
 		Level:         int64(user.Level),
-		Balance:       int64(user.Balance),
-	}, nil
+		Balance:       0,
+	}
+
+	if user.Id == int(in.Id) {
+		resp.IpAddress = user.IpAddress
+		resp.Mobile = user.Mobile
+		resp.Age = user.Age
+		resp.OnlineStatus = user.OnlineStatus
+		resp.Balance = int64(user.Balance)
+	}
+
+	return resp, nil
+
 }
 
 func (c *UserServer) UpdatePersonal(_ context.Context, in *__.UpdatePersonalRequest) (*__.UpdatePersonalResponse, error) {

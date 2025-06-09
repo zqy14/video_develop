@@ -27,6 +27,7 @@ const (
 	User_ListWork_FullMethodName       = "/proto.User/ListWork"
 	User_InfoWork_FullMethodName       = "/proto.User/InfoWork"
 	User_PostComment_FullMethodName    = "/proto.User/PostComment"
+	User_LikeWork_FullMethodName       = "/proto.User/LikeWork"
 )
 
 // UserClient is the client API for User service.
@@ -36,13 +37,12 @@ type UserClient interface {
 	SendSms(ctx context.Context, in *SendSmsRequest, opts ...grpc.CallOption) (*SendSmsResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	PublishContent(ctx context.Context, in *PublishContentRequest, opts ...grpc.CallOption) (*PublishContentResponse, error)
-	// rpc UpdateStatus(UpdateStatusRequest) returns(UpdateStatusResponse);//审核状态
-	// rpc Personal(PersonalRequest) returns(PersonalResponse); // 实名认证
 	Personal(ctx context.Context, in *PersonalRequest, opts ...grpc.CallOption) (*PersonalResponse, error)
 	UpdatePersonal(ctx context.Context, in *UpdatePersonalRequest, opts ...grpc.CallOption) (*UpdatePersonalResponse, error)
 	ListWork(ctx context.Context, in *ListWorkRequest, opts ...grpc.CallOption) (*ListWorkResponse, error)
 	InfoWork(ctx context.Context, in *InfoWorkRequest, opts ...grpc.CallOption) (*InfoWorkResponse, error)
 	PostComment(ctx context.Context, in *PostCommentRequest, opts ...grpc.CallOption) (*PostCommentResponse, error)
+	LikeWork(ctx context.Context, in *LikeWorkRequest, opts ...grpc.CallOption) (*LikeWorkResponse, error)
 }
 
 type userClient struct {
@@ -133,6 +133,16 @@ func (c *userClient) PostComment(ctx context.Context, in *PostCommentRequest, op
 	return out, nil
 }
 
+func (c *userClient) LikeWork(ctx context.Context, in *LikeWorkRequest, opts ...grpc.CallOption) (*LikeWorkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LikeWorkResponse)
+	err := c.cc.Invoke(ctx, User_LikeWork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility
@@ -140,13 +150,12 @@ type UserServer interface {
 	SendSms(context.Context, *SendSmsRequest) (*SendSmsResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	PublishContent(context.Context, *PublishContentRequest) (*PublishContentResponse, error)
-	// rpc UpdateStatus(UpdateStatusRequest) returns(UpdateStatusResponse);//审核状态
-	// rpc Personal(PersonalRequest) returns(PersonalResponse); // 实名认证
 	Personal(context.Context, *PersonalRequest) (*PersonalResponse, error)
 	UpdatePersonal(context.Context, *UpdatePersonalRequest) (*UpdatePersonalResponse, error)
 	ListWork(context.Context, *ListWorkRequest) (*ListWorkResponse, error)
 	InfoWork(context.Context, *InfoWorkRequest) (*InfoWorkResponse, error)
 	PostComment(context.Context, *PostCommentRequest) (*PostCommentResponse, error)
+	LikeWork(context.Context, *LikeWorkRequest) (*LikeWorkResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -177,6 +186,9 @@ func (UnimplementedUserServer) InfoWork(context.Context, *InfoWorkRequest) (*Inf
 }
 func (UnimplementedUserServer) PostComment(context.Context, *PostCommentRequest) (*PostCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostComment not implemented")
+}
+func (UnimplementedUserServer) LikeWork(context.Context, *LikeWorkRequest) (*LikeWorkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LikeWork not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 
@@ -335,6 +347,24 @@ func _User_PostComment_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_LikeWork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LikeWorkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).LikeWork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_LikeWork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).LikeWork(ctx, req.(*LikeWorkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -373,6 +403,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostComment",
 			Handler:    _User_PostComment_Handler,
+		},
+		{
+			MethodName: "LikeWork",
+			Handler:    _User_LikeWork_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

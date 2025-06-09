@@ -135,7 +135,6 @@ func Personal(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
-		"msg":  "个人信息展示成功",
 		"data": content,
 	})
 }

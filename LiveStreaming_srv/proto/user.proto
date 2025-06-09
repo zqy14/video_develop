@@ -132,6 +132,20 @@ message PostCommentResponse {
   string message = 2;
 }
 
+message LikeWorkRequest {
+  int64 userId = 1;
+  int64 workId = 2;
+}
+
+
+message LikeWorkResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+
+
+
 service User {
   rpc SendSms(SendSmsRequest) returns(SendSmsResponse);
   rpc Login(LoginRequest) returns(LoginResponse);
@@ -141,4 +155,5 @@ service User {
   rpc ListWork(ListWorkRequest) returns(ListWorkResponse);//翻看作品
   rpc InfoWork(InfoWorkRequest) returns(InfoWorkResponse);//作品详情
   rpc PostComment(PostCommentRequest) returns(PostCommentResponse);//发布评论
+  rpc LikeWork(LikeWorkRequest) returns(LikeWorkResponse);//作品点赞
 }

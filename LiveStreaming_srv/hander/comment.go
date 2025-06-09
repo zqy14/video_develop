@@ -6,24 +6,26 @@ import (
 	__ "LiveStreaming_srv/proto"
 	"context"
 	"gorm.io/gorm"
-	"log"
 )
 
 func (c *UserServer) PostComment(_ context.Context, in *__.PostCommentRequest) (*__.PostCommentResponse, error) {
-	log.Printf("收到发布评论请求: work_id=%d, user_id=%d", in.WorkId, in.UserId)
 
-	if in.WorkId <= 0 {
+	var user model.VideoUser
+	if err := global.DB.Where("id = ?", in.UserId).First(&user).Error; err != nil {
 		return &__.PostCommentResponse{
 			Success: false,
-			Message: "无效的作品ID",
+			Message: "用户不存在",
 		}, nil
 	}
-	if in.UserId <= 0 {
+
+	var work model.VideoWorks
+	if err := global.DB.Where("id = ?", in.WorkId).First(&work).Error; err != nil {
 		return &__.PostCommentResponse{
 			Success: false,
-			Message: "无效的用户ID",
+			Message: "作品不存在",
 		}, nil
 	}
+
 	if in.Content == "" {
 		return &__.PostCommentResponse{
 			Success: false,
@@ -31,7 +33,7 @@ func (c *UserServer) PostComment(_ context.Context, in *__.PostCommentRequest) (
 		}, nil
 	}
 
-	work := model.VideoWorkComment{
+	works := model.VideoWorkComment{
 		WorkId:  int(in.WorkId),
 		UserId:  int(in.UserId),
 		Content: in.Content,
@@ -39,25 +41,55 @@ func (c *UserServer) PostComment(_ context.Context, in *__.PostCommentRequest) (
 		Pid:     int(in.Pid),
 	}
 
-	if err := global.DB.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Create(&work).Error; err != nil {
-			return err
-		}
-
-		if err := tx.Model(&model.VideoWorks{}).Where("id = ?", in.WorkId).Update("comment_count", gorm.Expr("comment_count + 1")).Error; err != nil {
-			return err
-		}
-		return nil
-	}); err != nil {
-		log.Printf("发布评论失败: %v", err)
+	if err := global.DB.Model(&work).Where("id = ?", in.WorkId).
+		//UpdateColumn直接执行 SQL 更新，不触发 GORM 的钩子函数（如 BeforeUpdate），适合纯计数更新
+		UpdateColumn("comment_count", gorm.Expr("comment_count + ?", 1)).Error; err != nil {
 		return &__.PostCommentResponse{
 			Success: false,
-			Message: "发布评论失败: " + err.Error(),
+			Message: "更新评论数失败: " + err.Error(),
+		}, nil
+	}
+
+	if err := global.DB.Create(&works).Error; err != nil {
+		return &__.PostCommentResponse{
+			Success: false,
+			Message: "发布作品失败",
 		}, nil
 	}
 
 	return &__.PostCommentResponse{
 		Success: true,
 		Message: "发布评论成功",
+	}, nil
+
+}
+
+func (c *UserServer) LikeWork(_ context.Context, in *__.LikeWorkRequest) (*__.LikeWorkResponse, error) {
+	var user model.VideoUser
+	if err := global.DB.Where("id = ?", in.UserId).First(&user).Error; err != nil {
+		return &__.LikeWorkResponse{
+			Code:    500,
+			Message: "用户不存在",
+		}, nil
+	}
+
+	var work model.VideoWorks
+	if err := global.DB.Where("id = ?", in.WorkId).First(&work).Error; err != nil {
+		return &__.LikeWorkResponse{
+			Code:    500,
+			Message: "作品不存在",
+		}, nil
+	}
+
+	if err := global.DB.Model(&work).Where("id = ?", in.WorkId).UpdateColumn("like_count", gorm.Expr("like_count + ?", 1)).Error; err != nil {
+		return &__.LikeWorkResponse{
+			Code:    500,
+			Message: "点赞失败: " + err.Error(),
+		}, nil
+	}
+
+	return &__.LikeWorkResponse{
+		Code:    200,
+		Message: "作品点赞成功",
 	}, nil
 }
