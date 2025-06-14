@@ -1,0 +1,18 @@
+Mysql:
+   User: root
+   Password: root
+   Host: 127.0.0.1
+   Port: 3306
+   Database: video
+Red:
+   Addr:  127.0.0.1:6379
+   Password: ""
+   DB: 0
+Minio:
+   Endpoint: 14.103.243.153:9000
+   AccessKeyId: admin
+   AccessKeySecret: zqy123456
+   BucketName: test
+   UseSsl: false
+   BasePath: ""
+   BucketUrl: http://14.103.243.153:9000/test
