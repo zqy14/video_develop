@@ -17,7 +17,21 @@ func init() {
 	InitConsul()
 	InitConfig()
 	InitDB()
+	InitZap()
 }
+
+func InitZap() {
+	zapConfig := zap.NewProductionConfig()
+	zapConfig.OutputPaths = []string{"user.log"}
+	logger, err := zapConfig.Build()
+	if err != nil {
+		log.Println("初始化日志失败", err)
+		return
+	}
+	zap.ReplaceGlobals(logger)
+	zap.S().Infof("zap初始化日志成功")
+}
+
 
 func InitNaCos() {
 	v := viper.New()
@@ -75,7 +89,7 @@ func InitConsul() {
 	}
 	err = config.ConsulRegister(register)
 	if err != nil {
-		return
+		return  
 	} else {
 		log.Println("consul init success")
 	}
