@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"time"
-)
-
+）
 func RouTime() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now().UnixMilli()
