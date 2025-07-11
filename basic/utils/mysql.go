@@ -20,5 +20,5 @@ func GlobalMysql() *gorm.DB {
 	}
 	log.Println("mysql init success")
 
-	return db
+	return db  当分
 }
