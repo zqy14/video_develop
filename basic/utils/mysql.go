@@ -8,17 +8,31 @@ import (
 )
 
 var (
-	db  *gorm.DB
-	err error
+	db   *gorm.DB
+	Once sync.Once
+	err  error
 )
 
-func GlobalMysql() *gorm.DB {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local", config.Global.Mysql.User, config.Global.Mysql.Password, config.Global.Mysql.Host, config.Global.Mysql.Port, config.Global.Mysql.Database)
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+func InitMysql() {
+	//单例模式
+	Once.Do(func() {
+		dsn := "root:zqy123456@tcp(14.103.243.153:3306)/zc?charset=utf8mb4&parseTime=True&loc=Local"
+		global.DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+		if err != nil {
+			panic(err)
+		}
+		log.Println("mysql init success")
+	})
 	if err != nil {
-		panic(err)
+		return
 	}
-	log.Println("mysql init success")
 
-	return db  当分
+	sqlBD, _ := global.DB.DB()
+
+	//连接池参数
+	sqlBD.SetMaxIdleConns(100)
+	sqlBD.SetMaxOpenConns(100)
+	sqlBD.SetConnMaxLifetime(time.Hour)
+
 }
+
