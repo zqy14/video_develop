@@ -12,6 +12,16 @@ func ValidatePhone(mobile string) bool {
 	return matched
 }
 
+// 邮箱校验
+func ValidateEmail(email string) error {
+    pattern := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+    matched, _ := regexp.MatchString(pattern, email)
+    if !matched {
+        return errors.New("邮箱格式错误")
+    }
+    return nil
+}
+
 // 格式化时间显示
 func FormatTime(t time.Time) string {
 	now := time.Now()
