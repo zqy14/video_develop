@@ -74,3 +74,82 @@ func ValidateMobile(mobile string) error {
 	}
 	return nil
 }
+
+// 按月统计uv，pv
+//封装依赖包
+import (
+	"context"
+	"errors"
+	"fmt"
+	"github.com/redis/go-redis/v9"
+	"regexp"
+	"selftest/user-rpc/basic/config"
+	"selftest/user-rpc/handler/model"
+	__ "selftest/user-rpc/proto"
+	"time"
+)
+type StatsService struct {
+	redis *redis.Client
+}
+
+func NewStatsService(redis *redis.Client) *StatsService {
+	return &StatsService{redis: redis}
+}
+
+// RecordAccess 记录访问数据（PV+UV）
+func (s *StatsService) RecordAccess(ctx context.Context, userID string) error {
+	// 1. 获取当前月份（格式：YYYYMM）
+	monthKey := time.Now().Format("200601")
+
+	// 2. 记录PV（原子递增）
+	pvKey := fmt.Sprintf("stats:pv:%s", monthKey)
+	if err := s.redis.Incr(ctx, pvKey).Err(); err != nil {
+		return fmt.Errorf("记录PV失败: %v", err)
+	}
+
+	// 3. 记录UV（HyperLogLog）
+	uvKey := fmt.Sprintf("stats:uv:%s", monthKey)
+	if err := s.redis.PFAdd(ctx, uvKey, userID).Err(); err != nil {
+		return fmt.Errorf("记录UV失败: %v", err)
+	}
+
+	// 4. 记录用户访问日期（可选：用于精确去重）
+	userAccessKey := fmt.Sprintf("user_access:%s:%s", monthKey, userID)
+	if err := s.redis.SAdd(ctx, userAccessKey, time.Now().Format("02")).Err(); err != nil {
+		return fmt.Errorf("记录用户访问日期失败: %v", err)
+	}
+	s.redis.Expire(ctx, userAccessKey, 32*24*time.Hour) // 设置过期时间略大于一个月
+
+	return nil
+}
+
+// GetMonthlyStats 获取月度统计
+func (s *StatsService) GetMonthlyStats(ctx context.Context, month string) (pv int64, uv int64, err error) {
+	// 1. 获取PV
+	pvKey := fmt.Sprintf("stats:pv:%s", month)
+	pv, err = s.redis.Get(ctx, pvKey).Int64()
+	if err == redis.Nil {
+		pv = 0
+	} else if err != nil {
+		return 0, 0, fmt.Errorf("获取PV失败: %v", err)
+	}
+
+	// 2. 获取UV（HyperLogLog）
+	uvKey := fmt.Sprintf("stats:uv:%s", month)
+	uv, err = s.redis.PFCount(ctx, uvKey).Result()
+	if err != nil {
+		return 0, 0, fmt.Errorf("获取UV失败: %v", err)
+	}
+
+	return pv, uv, nil
+}
+
+// GetUserAccessDays 获取用户当月访问天数（精确统计）
+func (s *StatsService) GetUserAccessDays(ctx context.Context, userID string) (int, error) {
+	monthKey := time.Now().Format("200601")
+	userAccessKey := fmt.Sprintf("user_access:%s:%s", monthKey, userID)
+	return s.redis.SCard(ctx, userAccessKey).Result()
+}
+
+
+
