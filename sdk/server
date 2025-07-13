@@ -152,4 +152,14 @@ func (s *StatsService) GetUserAccessDays(ctx context.Context, userID string) (in
 }
 
 
+// 展示空闲科室
+fmt.Println("===== 空闲科室列表 =====")
+fmt.Printf("扫描时间: %s\n", now.Format("2006-01-02 15:04:05"))
+fmt.Println("-----------------------")
+
+if len(freeDepartments) == 0 {
+	fmt.Println("当前没有空闲科室")
+	return
+}
+
 
