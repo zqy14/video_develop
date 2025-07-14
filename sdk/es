@@ -1,1 +1,40 @@
+//服务器添加 
+curl -u elastic:Elastic_JP5QtJ -X POST "http://14.103.243.153:9200/bank/_doc" \
+   -H "Content-Type: application/json" \
+   -d '{
+     "content": "随机"
+   }'
+//查询一条
+curl -u elastic:Elastic_JP5QtJ -X GET "http://14.103.243.153:9200/bank/_search?pretty" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": {
+      "match": {
+        "content": {
+          "query": "快乐源泉",
+          "analyzer": "ik_smart"
+        }
+      }
+    }
+  }'
 
+
+可视化es
+ POST /shop/_doc
+{
+   "id":2,
+   "name": "2212a",
+  "title": "第三方",
+  "c_type": "1",
+  "content":"当分得分多发"
+}
+
+GET /shop/_search
+{
+  "query": {
+    "match": {
+      "name": "2212a"
+    }
+  },
+  "size": 1
+}
