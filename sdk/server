@@ -162,4 +162,21 @@ if len(freeDepartments) == 0 {
 	return
 }
 
+//分页
+var hospitals []model.Hospitals
+var total int64
+
+// 获取总数
+if err := config.DB.Model(&model.Hospitals{}).Count(&total).Error; err != nil {
+	return nil, err
+}
+
+// 计算分页参数
+offset := (in.Page - 1) * in.Size
+
+// 查询分页数据
+err := config.DB.Offset(int(offset)).Limit(int(in.Size)).Find(&hospitals).Error
+if err != nil {
+	return nil, err
+}
 
