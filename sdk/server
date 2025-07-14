@@ -180,3 +180,44 @@ if err != nil {
 	return nil, err
 }
 
+
+//处理并发
+// 1. 创建并发控制通道(带缓冲)
+	concurrentLimit := make(chan struct{}, 5) // 限制最大并发数为5
+
+	// 2. 创建WaitGroup用于等待所有任务完成
+	var wg sync.WaitGroup
+
+	// 3. 模拟1000个任务
+	totalTasks := 1000
+	wg.Add(totalTasks) // 添加总任务数
+
+	// 4. 启动所有任务(并发受限于channel缓冲)
+	for i := 1; i <= totalTasks; i++ {
+		go func(taskID int) {
+			// 获取一个并发槽位(如果已满会阻塞)
+			concurrentLimit <- struct{}{}
+
+			// 确保任务完成后释放槽位
+			defer func() {
+				<-concurrentLimit
+				wg.Done() // 标记任务完成
+			}()
+
+			// 执行任务
+			processTask(taskID)
+		}(i)
+	}
+
+	// 5. 等待所有任务完成
+	wg.Wait()
+	fmt.Println("所有1000个任务处理完成!")
+
+// 模拟任务处理
+func processTask(id int) {
+	fmt.Printf("开始处理任务 %d (当前时间: %s)\n", id, time.Now().Format("15:04:05"))
+	time.Sleep(500 * time.Millisecond) // 模拟耗时操作
+	fmt.Printf("完成任务 %d\n", id)
+}
+
+
