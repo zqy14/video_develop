@@ -22,19 +22,32 @@ curl -u elastic:Elastic_JP5QtJ -X GET "http://14.103.243.153:9200/bank/_search?p
 可视化es
  POST /shop/_doc
 {
-   "id":2,
    "name": "2212a",
-  "title": "第三方",
-  "c_type": "1",
   "content":"当分得分多发"
 }
 
 GET /shop/_search
 {
-  "query": {
-    "match": {
-      "name": "2212a"
-    }
-  },
-  "size": 1
+  "query": {
+    "term": {
+      "name.keyword": "赵四"
+    }
+  },
+  "size": 1
+}
+
+//高亮es
+GET /shop/_search
+{
+  "query": {
+    "match": {
+      "name": "赵四"
+    }
+  },
+  "highlight": {
+    "fields": {
+      "name": {}   
+    }
+  },
+  "size": 1
 }
