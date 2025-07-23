@@ -1,0 +1,90 @@
+//中间件实现uv统计
+const (
+// Key格式: Uv:index:<年⽉>:<周数>
+uvKeyFormat = "Uv:index:%s:%d"
+)
+type UVTracker struct {
+rdb *redis.Client
+}
+func NewUVTracker(rdb *redis.Client) *UVTracker {
+return &UVTracker{rdb: rdb}
+}
+// 获取当前年⽉和周数
+func getCurrentYearWeek() (string, int) {
+now := time.Now()
+yearMonth := now.Format("200601") // 格式化为202507
+_, week := now.ISOWeek() // 获取ISO周数
+return yearMonth, week
+}
+// ⽣成Redis key
+func (t *UVTracker) generateKey(yearMonth string, week int) string {
+return fmt.Sprintf(uvKeyFormat, yearMonth, week)
+}
+// 添加⽤⼾到UV统计
+func (t *UVTracker) AddUser(ctx *gin.Context, userID string) error {
+yearMonth, week := getCurrentYearWeek()
+key := t.generateKey(yearMonth, week)
+// 使⽤PFADD命令添加⽤⼾到HyperLogLog
+_, err := t.rdb.PFAdd(ctx, key, userID).Result()
+return err
+}
+// 获取UV统计数
+func (t *UVTracker) GetCount(ctx *gin.Context, yearMonth string, week int) (int64, error) {
+key := t.generateKey(yearMonth, week)
+return t.rdb.PFCount(ctx, key).Result()
+}
+// Gin中间件
+func UVMiddleware(tracker *UVTracker) gin.HandlerFunc {
+return func(c *gin.Context) {
+// 从请求中获取⽤⼾标识（可根据实际情况调整）
+userID := c.GetHeader("X-User-ID")
+if userID == "" {
+// 如果没有显式⽤⼾ID，使⽤IP+UA作为替代标识
+userID = c.ClientIP() + c.GetHeader("User-Agent")
+}
+// 添加到UV统计
+if err := tracker.AddUser(c, userID); err != nil {
+c.AbortWithStatusJSON(500, gin.H{
+"error": "failed to track UV",
+})
+return
+}
+c.Next()
+}
+
+// 初始化Redis客⼾端
+rdb := redis.NewClient(&redis.Options{
+Addr: "localhost:6379",
+Password: "", // ⽆密码
+DB: 0, // 默认DB
+})
+// 初始化UV跟踪器
+uvTracker := NewUVTracker(rdb)
+
+// 应⽤UV统计中间件
+r.Use(UVMiddleware(uvTracker))
+
+
+// 测试路由
+r.GET("/", func(c *gin.Context) {
+c.JSON(200, gin.H{
+"message": "Welcome! Your visit has been counted.",
+})
+})
+// 获取UV统计数据的路由
+r.GET("/stats", func(c *gin.Context) {
+yearMonth, week := getCurrentYearWeek()
+count, err := uvTracker.GetCount(c, yearMonth, week)
+if err != nil {
+c.JSON(500, gin.H{"error": err.Error()})
+return
+}
+c.JSON(200, gin.H{
+"period": fmt.Sprintf("%s week %d", yearMonth, week),
+"uv_count": count,
+})
+})
+// 启动服务器
+if err := r.Run(":8080"); err != nil {
+log.Fatal("Failed to start server:", err)
+}
