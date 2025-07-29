@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: unless-stopped
+
+  chat-server:
+    build: .
+    container_name: chat-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mosquitto
+    environment:
+      - MQTT_BROKER=tcp://mosquitto:1883
+    restart: unless-stopped
