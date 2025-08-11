@@ -5,3 +5,22 @@
 	if err != nil {
 		log.Printf("通知发送失败: %v", err)
 	}
+
+
+	// 获取当天日期
+	today := time.Now().Format("2006-01-02")
+
+	// a) 当天配送数统计
+	deliveryCount := utils.CountDeliveries(today)
+	fmt.Printf("当日配送总数: %d\n", deliveryCount)
+
+	// b) 快递员分级统计
+	courierStats := utils.CountCouriers()
+	fmt.Println("\n快递员分级统计:")
+	for level, percent := range courierStats {
+		fmt.Printf("%s级: %.1f%%\n", level, percent)
+	}
+
+	// c) 单日开箱数统计
+	openBoxCount := utils.CountDailyOpenBoxes(today)
+	fmt.Printf("\n单日开箱数(去重): %d\n", openBoxCount)
