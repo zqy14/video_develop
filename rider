@@ -1,0 +1,7 @@
+// 4. 发送通知
+	message := "尊敬的" + in.Name + "，您已成功加入骑手团队并拥有管理员权限!"
+	notifier := pkgs.SMSNotifier{}
+	err = notifier.Send(message)
+	if err != nil {
+		log.Printf("通知发送失败: %v", err)
+	}
