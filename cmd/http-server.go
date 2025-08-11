@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"net/http"
-	"rider-management/internal/pb"
+	__ "rider-device/initenal/proto"
 )
 
 // 添加骑手请求结构体
@@ -16,31 +16,30 @@ type AddRiderRequest struct {
 }
 
 func main() {
+	// 3. 初始化Gin路由
+	router := gin.Default()
+
 	// 1. 连接gRPC服务
-	conn, err := grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial("localhost:50091", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("连接gRPC服务失败: %v", err)
 	}
 	defer conn.Close()
 
 	// 2. 创建gRPC客户端
-	riderClient := pb.NewRiderServiceClient(conn)
-
-	// 3. 初始化Gin路由
-	//router = Gin路由
-	router := gin.Default()
+	riderClient := __.NewRiderServiceClient(conn)
 
 	// 4. 添加骑手路由
 	router.POST("/api/riders", func(c *gin.Context) {
 		// 4.1 绑定请求参数
 		var req AddRiderRequest
-		if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "参数错误: " + err.Error()})
+		if err := c.ShouldBind(&req); err != nil {
+			c.JSON(http.StatusOK, gin.H{"error": "参数错误: " + err.Error()})
 			return
 		}
 
 		// 4.2 构造gRPC请求
-		grpcReq := &pb.AddRiderRequest{
+		grpcReq := &__.AddRiderRequest{
 			Name:  req.Name,
 			Phone: req.Phone,
 		}
@@ -48,7 +47,7 @@ func main() {
 		// 4.3 调用gRPC服务
 		resp, err := riderClient.AddRider(c, grpcReq)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			c.JSON(http.StatusOK, gin.H{"error": err.Error()})
 			return
 		}
 
@@ -61,8 +60,7 @@ func main() {
 	})
 
 	// 5. 启动HTTP服务
-	log.Println("HTTP服务启动，监听端口: 8080")
-	if err := router.Run(":8080"); err != nil {
+	if err := router.Run(":8084"); err != nil {
 		log.Fatalf("HTTP服务启动失败: %v", err)
 	}
 }
