@@ -9,4 +9,6 @@ var (
 	GloBalConfig Config
 	BD           *gorm.DB
 	Red          *redis.Client
+    Es           *elasticsearch.Client
+
 )
