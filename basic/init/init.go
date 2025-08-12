@@ -16,6 +16,8 @@ import (
 func init() {
 	InitConfig()
 	InitDB()
+   utils.InitEs()
+
 }
 
 func InitDB() {
